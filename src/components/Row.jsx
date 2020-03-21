@@ -3,8 +3,8 @@ import Movie from "./Movie";
 import Title from "./Title";
 import { MovieContext } from "./MovieContext";
 import Slider from "react-slick";
-import "../slick.css";
-import "../slick-theme.css";
+import "../carousel/slick.css";
+import "../carousel/slick-theme.css";
 
 const Row = () => {
   const { movies, setMovies, movieDetails, setMovieDetails } = useContext(
@@ -12,25 +12,28 @@ const Row = () => {
   );
 
   useEffect(() => {
+    //API call
     const getMovies = async () => {
       const API_KEY = process.env.REACT_APP_API_KEY;
+
       let today = new Date();
       let year = today.getFullYear();
       let lastMonth = ("0" + (today.getMonth() - 1)).slice(-2);
       let currentMonth = ("0" + (today.getMonth() + 1)).slice(-2);
       let date = ("0" + today.getDate()).slice(-2);
 
+      //Format date yyyy-mm-dd
       let formatLastMonth = `${year}-${lastMonth}-${date}`;
       let formatToday = `${year}-${currentMonth}-${date}`;
 
       const response = await fetch(
         `https://api.themoviedb.org/3/discover/movie?region=GB&with_original_language=en&include_video=true&without_genres=99&primary_release_date.gte=${formatLastMonth}&primary_release_date.lte=${formatToday}&api_key=${API_KEY}`
       );
-
       const data = await response.json();
-      console.log(data.results);
+
       setMovies(data.results);
 
+      //Set first result to Showcase for autoplay on load
       setMovieDetails({
         id: data.results[0].id,
         banner: data.results[0].backdrop_path,
@@ -40,9 +43,20 @@ const Row = () => {
       });
     };
     getMovies();
-  }, [setMovies, setMovieDetails]);
+  }, [setMovies, setMovieDetails]); //updates on change
 
-  var settings = {
+  //STYLES
+  const styledRow = {
+    position: "absolute",
+    width: "95%",
+    bottom: 0,
+    left: "40px",
+    opacity: movies.length ? 1 : 0,
+    transition: "all 0.5s ease"
+  };
+
+  //SLIDER SETTINGS
+  const sliderSettings = {
     focusOnSelect: true,
     dots: false,
     infinite: true,
@@ -58,9 +72,9 @@ const Row = () => {
         setMovieDetails
       }}
     >
-      <div style={row}>
+      <div style={styledRow}>
         <Title title="In Cinemas" />
-        <Slider {...settings}>
+        <Slider {...sliderSettings}>
           {movies.map(movie => {
             return <Movie key={movie.id} movie={movie} />;
           })}
@@ -71,10 +85,3 @@ const Row = () => {
 };
 
 export default Row;
-
-const row = {
-  position: "absolute",
-  width: "95%",
-  bottom: 0,
-  left: "40px"
-};
