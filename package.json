@@ -10,8 +10,10 @@
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "react-slick": "^0.25.2",
     "react-youtube": "^7.9.0",
     "react-youtube-background": "^0.2.1",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.0.1"
   },
   "scripts": {

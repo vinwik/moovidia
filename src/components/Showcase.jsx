@@ -76,7 +76,7 @@ const Showcase = () => {
             position: "fixed",
             top: 0,
             width: "100%",
-            height: "100%",
+            height: "75%",
             maxHeight: "75vh",
             transition: "opacity, background 0.5s ease",
             zIndex: -1
@@ -87,8 +87,8 @@ const Showcase = () => {
             style={{
               position: "absolute",
               width: "30%",
-              bottom: "15vh",
-              marginLeft: "20px",
+              bottom: "100px",
+              marginLeft: "40px",
               textShadow: "0 0 10px #000"
             }}
           >
