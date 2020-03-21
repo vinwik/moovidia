@@ -10,7 +10,7 @@ const Showcase = () => {
 
   useEffect(() => {
     const getMovie = async () => {
-      const API_KEY = "e58b7e8de66faddc44e4570baf218619";
+      const API_KEY = process.env.REACT_APP_API_KEY;
 
       if (movieDetails.id) {
         const response = await fetch(

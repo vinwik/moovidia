@@ -13,7 +13,7 @@ const Row = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const API_KEY = "e58b7e8de66faddc44e4570baf218619";
+      const API_KEY = process.env.REACT_APP_API_KEY;
       let today = new Date();
       let year = today.getFullYear();
       let lastMonth = ("0" + (today.getMonth() - 1)).slice(-2);
@@ -40,13 +40,9 @@ const Row = () => {
       });
     };
     getMovies();
-    // return () => {
-    //   cleanup;
-    // };
   }, [setMovies, setMovieDetails]);
 
   var settings = {
-    // arrows: false,
     focusOnSelect: true,
     dots: false,
     infinite: true,
@@ -56,16 +52,12 @@ const Row = () => {
   };
 
   return (
-    // <div style={row}>
     <MovieContext.Provider
       value={{
         movieDetails,
         setMovieDetails
       }}
     >
-      {/* <div style={rowWrapper}> */}
-      {/* <div style={highlitedMovie}></div> */}
-      {/* <div style={movieWrapper}> */}
       <div style={row}>
         <Title title="In Cinemas" />
         <Slider {...settings}>
@@ -74,10 +66,7 @@ const Row = () => {
           })}
         </Slider>
       </div>
-      {/* </div> */}
-      {/* </div> */}
     </MovieContext.Provider>
-    // </div>
   );
 };
 
@@ -88,21 +77,4 @@ const row = {
   width: "95%",
   bottom: 0,
   left: "40px"
-};
-const rowWrapper = {
-  paddingLeft: "20px"
-};
-
-const highlitedMovie = {
-  position: "absolute",
-  top: 0,
-  left: 80,
-  width: "185px",
-  height: "300px",
-  border: "3px solid white",
-  zIndex: 5
-};
-
-const movieWrapper = {
-  display: "flex"
 };
