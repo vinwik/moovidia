@@ -13,6 +13,7 @@ const Movie = ({ movie }) => {
     background: `no-repeat center center/cover`,
     backgroundImage: `url("https://image.tmdb.org/t/p/original${movie.poster_path}")`,
     borderRadius: "1px",
+    boxShadow: "0 0 10px #000",
     cursor: "pointer"
   };
 

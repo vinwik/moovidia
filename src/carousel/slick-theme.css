@@ -1,5 +1,9 @@
 @charset "UTF-8";
 /* Slider */
+.slick-list {
+  padding: 10px 0px;
+}
+
 .slick-loading .slick-list {
   background: #fff url("./ajax-loader.gif") center center no-repeat;
 }

@@ -76,7 +76,7 @@ const Showcase = () => {
   const styledDescription = {
     position: "absolute",
     width: "30%",
-    bottom: "100px",
+    bottom: "110px",
     marginLeft: "40px",
     textShadow: "0 0 10px #000"
   };
