@@ -1,37 +1,65 @@
 import React, { useContext } from "react";
 import { MovieContext } from "./MovieContext";
+import Play from "./Play";
 
 const Movie = ({ movie }) => {
-  const { setMovieDetails } = useContext(MovieContext);
+  const {
+    movieDetails,
+    setMovieDetails,
+    isBuffering,
+    setIsBuffering,
+    isPlaying,
+    setIsPlaying,
+    currentProgress,
+  } = useContext(MovieContext);
+
+  const handleClick = () => {
+    setIsPlaying(false);
+    setIsBuffering(true);
+
+    setMovieDetails({
+      id: movie.id,
+      banner: movie.backdrop_path,
+      title: movie.title,
+      overview: movie.overview,
+      release_date: movie.release_date.slice(0, 4),
+    });
+  };
 
   //STYLES
   const styledMovie = {
-    height: "225px",
-    width: "150px",
-    maxHeight: "30vh",
-    maxWidth: "auto",
+    height: "30vh",
     background: `no-repeat center center/cover`,
     backgroundImage: `url("https://image.tmdb.org/t/p/original${movie.poster_path}")`,
     borderRadius: "1px",
-    boxShadow: "0 0 10px #000",
-    cursor: "pointer"
+    // boxShadow: "0 0 10px #000",
+    cursor: "pointer",
   };
 
   return (
     <div
       onClick={() => {
-        //Set movie details for Showcase
-        setMovieDetails({
-          id: movie.id,
-          banner: movie.backdrop_path,
-          title: movie.title,
-          overview: movie.overview,
-          release_date: movie.release_date.slice(0, 4)
-        });
+        handleClick();
       }}
       className="movie"
       style={styledMovie}
-    ></div>
+    >
+      <div
+        className={`play-layer ${
+          movie.id === movieDetails.id && isPlaying
+            ? "visible"
+            : movie.id === movieDetails.id && isBuffering && "visible rotate"
+        }`}
+      >
+        {movie.id === movieDetails.id && isBuffering ? (
+          <Play currentProgress={0.25} opacity={"0.85"} />
+        ) : movie.id === movieDetails.id && isPlaying ? (
+          <Play currentProgress={currentProgress} opacity={"0.85"} />
+        ) : (
+          <Play currentProgress={0} opacity={"1"} />
+        )}
+      </div>
+    </div>
   );
 };
 

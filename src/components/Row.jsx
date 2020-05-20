@@ -7,9 +7,18 @@ import "../carousel/slick.css";
 import "../carousel/slick-theme.css";
 
 const Row = () => {
-  const { movies, setMovies, movieDetails, setMovieDetails } = useContext(
-    MovieContext
-  );
+  const {
+    movies,
+    setMovies,
+    movieDetails,
+    setMovieDetails,
+    isBuffering,
+    setIsBuffering,
+    isPlaying,
+    setIsPlaying,
+    currentProgress,
+    setCurrentProgress,
+  } = useContext(MovieContext);
 
   useEffect(() => {
     //API call
@@ -18,8 +27,8 @@ const Row = () => {
 
       let today = new Date();
       let year = today.getFullYear();
-      let lastMonth = ("0" + (today.getMonth() - 1)).slice(-2);
-      let currentMonth = ("0" + (today.getMonth() + 1)).slice(-2);
+      let lastMonth = ("0" + (today.getMonth() - 3)).slice(-2);
+      let currentMonth = ("0" + (today.getMonth() - 1)).slice(-2);
       let date = ("0" + today.getDate()).slice(-2);
 
       //Format date yyyy-mm-dd
@@ -39,7 +48,7 @@ const Row = () => {
         banner: data.results[0].backdrop_path,
         title: data.results[0].title,
         overview: data.results[0].overview,
-        release_date: data.results[0].release_date.slice(0, 4)
+        release_date: data.results[0].release_date.slice(0, 4),
       });
     };
     getMovies();
@@ -48,34 +57,41 @@ const Row = () => {
   //STYLES
   const styledRow = {
     position: "absolute",
-    width: "95%",
+    width: "100%",
     bottom: 0,
-    left: "40px",
+    // left: "40px",
+    padding: "0 40px",
     opacity: movies.length ? 1 : 0,
-    transition: "all 0.5s ease"
+    transition: "all 0.5s ease",
   };
 
   //SLIDER SETTINGS
   const sliderSettings = {
-    focusOnSelect: true,
+    // focusOnSelect: true,
     dots: false,
     infinite: true,
     speed: 200,
     slidesToShow: 9,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
 
   return (
     <MovieContext.Provider
       value={{
         movieDetails,
-        setMovieDetails
+        setMovieDetails,
+        isBuffering,
+        setIsBuffering,
+        isPlaying,
+        setIsPlaying,
+        currentProgress,
+        setCurrentProgress,
       }}
     >
       <div style={styledRow}>
         <Title title="In Cinemas" />
-        <Slider {...sliderSettings}>
-          {movies.map(movie => {
+        <Slider {...sliderSettings} className="row">
+          {movies.map((movie) => {
             return <Movie key={movie.id} movie={movie} />;
           })}
         </Slider>
