@@ -14,9 +14,82 @@ body {
   color: #fff;
 }
 
-.movie:focus {
-  outline-offset: -3px;
-  outline-width: 3px;
-  outline-style: solid;
-  outline-color: #d6681e;
+.movie {
+  transition: transform 0.2s ease-in-out;
+  width: 95%;
+}
+
+.play-layer {
+  width: 100%;
+  height: 100%;
+  background: #00000050;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  transition-delay: 0.05s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 50%;
+    height: 50%;
+
+    path {
+      fill: #f2f2f2;
+    }
+  }
+}
+
+.circle-progress {
+  transform: rotate(-90deg) translate(calc(-100% + 8px), 8px);
+}
+
+.visible {
+  opacity: 1;
+}
+
+@keyframes buffering {
+  0% {
+    transform-origin: center;
+    transform: rotate(-90deg) translate(8px, 8px);
+    stroke-dashoffset: 1407;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    transform-origin: center;
+    transform: rotate(270deg) translate(8px, 8px);
+    stroke-dashoffset: -1407;
+  }
+}
+
+.rotate {
+  .circle-progress {
+    animation: buffering 2s cubic-bezier(0.68, 0, 0.265, 1) 0s infinite normal
+      none;
+  }
+}
+
+.movie:hover .play-layer {
+  opacity: 1;
+}
+
+.row:hover .movie:hover {
+  transform: scale(1.05);
+}
+.row:hover .movie {
+  transform: scale(0.9);
+  position: relative;
+  transition-delay: 0.05s;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #00000070;
+  }
 }

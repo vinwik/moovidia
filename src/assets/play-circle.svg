@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="clip-play-circle">
+      <rect width="512" height="512"/>
+    </clipPath>
+  </defs>
+  <g id="play-circle" clip-path="url(#clip-play-circle)">
+    <path id="play-solid" d="M212.206,107.362,36.2,3.316C21.9-5.134,0,3.066,0,23.965V232.007a23.979,23.979,0,0,0,36.2,20.649l176-104a23.973,23.973,0,0,0,0-41.3Z" transform="translate(160 127.968)" fill="#fff"/>
+    <g id="circle" fill="none" stroke="#fff" stroke-width="50">
+      <circle cx="256" cy="256" r="256" stroke="none"/>
+      <circle cx="256" cy="256" r="231" fill="none"/>
+    </g>
+    <g id="circle-progress" fill="none" stroke="#fff" stroke-width="50">
+      <circle cx="256" cy="256" r="256" stroke="none"/>
+      <circle cx="256" cy="256" r="231" fill="none"/>
+    </g>
+  </g>
+</svg>
