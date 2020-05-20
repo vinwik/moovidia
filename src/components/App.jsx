@@ -6,6 +6,9 @@ import { MovieContext } from "./MovieContext";
 function App() {
   const [movies, setMovies] = useState([]);
   const [movieDetails, setMovieDetails] = useState([]);
+  const [isBuffering, setIsBuffering] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(null);
+  const [currentProgress, setCurrentProgress] = useState(0);
 
   return (
     <div className="App">
@@ -14,7 +17,13 @@ function App() {
           movies,
           setMovies,
           movieDetails,
-          setMovieDetails
+          setMovieDetails,
+          isBuffering,
+          setIsBuffering,
+          isPlaying,
+          setIsPlaying,
+          currentProgress,
+          setCurrentProgress,
         }}
       >
         <Showcase />
